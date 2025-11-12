@@ -31,9 +31,9 @@ que l'iA est avant tout un OUTILS qui ne remplacera pas l'homme.
 Equipe 11:
 Bastien 42
 Macéo 	42
-Ismael	Hepiteck
-Damien	Hepiteck
-Tangui	Hepiteck
+Ismael	epitech
+Damien	epitech
+Tangui	epitech
 
 Sujet 2: Une aide pour les études de marché
 
