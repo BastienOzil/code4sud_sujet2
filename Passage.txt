@@ -1,0 +1,33 @@
+🎤 Liste Définitive des Arguments pour le Pitch (J-2)
+
+I. Le Problème & Le Défi (Diapositive 1)
+
+    Fragmentation : Le cœur du problème est la fragmentation des données. La nécessité de compiler et nettoyer manuellement plus de 7 sources publiques officielles (API, BDD).
+
+    Obsolescence & Coût : Cette complexité d'analyse mène à une obsolescence rapide des études et engendre un coût financier prohibitif pour une PME.
+
+    Justification du Secteur : Le choix de l'Agriculture Bio était stratégique, car c'est un secteur porteur disposant d'une richesse de données publiques accessibles (traçabilité Agence Bio, GéoRisques).
+
+II. La Solution & La Preuve Technique (Diapositives 2 & 3)
+
+    La Proposition de Valeur : L'E-Analyste Bio est un outil de Triage Stratégique (Gatekeeper Tool) qui fournit un verdict de faisabilité immédiat avant d'engager des études conventionnelles.
+
+    Le Moteur (Process) : Notre architecture repose sur la capacité du Super-Prompt à transformer les données brutes en analyse stratégique. L'IA (DeepSeek/Mistral Large) est le "Consultant Senior" qui synthétise.
+
+    Avantage Compétitif (Analyse de Risque) : Notre moteur est le seul à intégrer l'analyse de Viabilité du Terrain (Score de Viabilité) en croisant les GéoRisques locaux (Pollution, Inondation, Sécheresse) avec l'opportunité de marché.
+
+    Le Verdict Calculé (KPIs) : La preuve est dans les chiffres :
+
+        Pression Commerciale Locale : (Habitants / Concurrents directs).
+
+        Part de Marché Régionale : (Comparaison de la production Régionale vs. Nationale).
+
+III. La Valeur Marché & Le Futur (Diapositives 4 & 5)
+
+    Le Cœur de Cible (Business Model) : Notre outil s'adresse à l'Expertise Comptable et au Conseil, une profession en mutation vers le conseil stratégique plutôt que la simple saisie.
+
+    La Plus-Value pour le Consultant : L'outil permet le suivi de clientèle et la préparation d'entretiens rapides avec une forte plus-value, servant de filtre pour ne facturer que les études viables.
+
+    La Vision Proactive (Amélioration Future) : Notre outil évoluera vers un système de Veille Proactive (Web Scraping d'actualité/législation) pour alerter les clients en temps réel des risques (sanitaires, légaux) ou des opportunités (subventions, modes).
+
+    Pérennité & Souveraineté (RGPD) : L'architecture est conçue pour la transposition à d'autres secteurs (Mobilité, Rénovation) et permet une migration vers des solutions Ollama/Cloud Souverain (justifié par le travail déjà effectué) pour garantir la conformité RGPD.
