@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Configuration</title>
+    <script src="config.js"></script>
+</head>
+<body>
+    <h1>Test de Configuration BioMarket Insights</h1>
+    <div id="results"></div>
+    
+    <script>
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.innerHTML = `
+            <h2>Configuration Détectée :</h2>
+            <ul>
+                <li><strong>Environnement local :</strong> ${CONFIG.IS_LOCAL ? 'Oui ✅' : 'Non'}</li>
+                <li><strong>Production :</strong> ${CONFIG.IS_PRODUCTION ? 'Oui' : 'Non'}</li>
+                <li><strong>GitHub Pages :</strong> ${CONFIG.IS_GITHUB_PAGES ? 'Oui' : 'Non'}</li>
+                <li><strong>Mode démo activé :</strong> ${CONFIG.USE_DEMO_MODE ? 'Oui ⚠️' : 'Non'}</li>
+                <li><strong>URL de l'API :</strong> ${CONFIG.API_ANALYZE_URL || 'Non configurée (mode démo)'}</li>
+                <li><strong>Hostname actuel :</strong> ${window.location.hostname}</li>
+            </ul>
+            
+            <h3>Résultat :</h3>
+            <p style="padding: 1rem; background: ${CONFIG.USE_DEMO_MODE ? '#fff3cd' : '#d4edda'}; border-radius: 8px;">
+                ${CONFIG.USE_DEMO_MODE 
+                    ? '⚠️ Le site fonctionnera en <strong>mode démonstration</strong> avec des données d\'exemple.'
+                    : '✅ Le site utilisera l\'<strong>API réelle</strong> pour générer les analyses.'
+                }
+            </p>
+        `;
+    </script>
+</body>
+</html>

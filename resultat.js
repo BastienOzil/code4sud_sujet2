@@ -1,4 +1,6 @@
-const API_ANALYZE_URL = 'http://localhost:3000/api/analyze';
+// Utilisation de la configuration dynamique
+const API_ANALYZE_URL = CONFIG.API_ANALYZE_URL;
+const USE_DEMO_MODE = CONFIG.USE_DEMO_MODE;
 
 function decodeParam(key) {
   const params = new URLSearchParams(window.location.search);
@@ -61,20 +63,212 @@ async function init() {
 }
 
 async function fetchStudy() {
+  // Si en mode démo (pas d'API configurée), utiliser des données de démo
+  if (USE_DEMO_MODE || !API_ANALYZE_URL) {
+    console.warn('Mode démo activé - utilisation de données d\'exemple');
+    return generateDemoData();
+  }
+  
   const response = await fetch(API_ANALYZE_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ secteur, region, objectif, ville, model })
+    body: JSON.stringify({ secteur, region, objectif, ville })
   });
   if (!response.ok) throw new Error(`API analyse: ${response.status}`);
   return response.json();
 }
 
+function generateDemoData() {
+  return new Promise(resolve => {
+    // Simuler un délai de chargement
+    setTimeout(() => {
+      resolve({
+        metadata: {
+          secteur: secteur,
+          ville: ville,
+          region: region,
+          objectif: objectif
+        },
+        summary: `Cette analyse porte sur le marché ${secteur} dans la zone de ${ville}. 
+          Le marché bio local montre une dynamique positive avec une croissance soutenue. 
+          Les opportunités sont présentes mais nécessitent une approche ciblée et différenciée. 
+          Note : Ces données sont fournies à titre de démonstration uniquement.`,
+        kpis: {
+          marche: '25-35 M€',
+          acteurs: 45,
+          croissance: '+5.2%',
+          potentiel: 'Modéré à Élevé',
+          trends: {
+            marche: 'Croissance stable',
+            acteurs: 'Écosystème développé',
+            croissance: 'Dynamique positive',
+            potentiel: 'Opportunités identifiées'
+          }
+        },
+        keyPoints: [
+          'Demande locale en croissance constante (+5% annuel)',
+          'Présence de 45 opérateurs bio recensés dans la zone',
+          'Concurrence modérée avec des niches encore disponibles',
+          'Sensibilisation croissante des consommateurs locaux',
+          'Circuits courts et producteurs locaux bien établis',
+          'Potentiel d\'innovation sur les segments premium'
+        ],
+        actors: [
+          { name: 'Coopérative Bio Locale', type: 'Producteur', market: 'Leader régional', growth: 'Site web' },
+          { name: 'Marché Fermier du Centre', type: 'Distribution', market: '2e position', growth: '+12%' },
+          { name: 'Épicerie Verte', type: 'Commerce', market: 'Niche urbaine', growth: 'Stable' },
+          { name: 'Ferme des 3 Vallées', type: 'Producteur', market: 'Spécialisé', growth: '+8%' }
+        ],
+        operateurs: {
+          total: 45,
+          list: [
+            { nom: 'Coopérative Bio Locale', categorie: 'Producteur', activite: 'Maraîchage', site: 'http://example.com' },
+            { nom: 'Marché Fermier du Centre', categorie: 'Distribution', activite: 'Vente directe', site: 'http://example.com' },
+            { nom: 'Épicerie Verte', categorie: 'Commerce', activite: 'Épicerie bio', site: null }
+          ]
+        },
+        recommendations: [
+          { title: 'Cibler les circuits courts', desc: 'Privilégier les partenariats avec les producteurs locaux pour se différencier.' },
+          { title: 'Développer une offre premium', desc: 'Exploiter la niche des produits bio haut de gamme encore peu concurrencée.' },
+          { title: 'Miser sur le digital', desc: 'Mettre en place une stratégie omnicanale (e-commerce + points de vente physiques).' },
+          { title: 'Communiquer sur l\'origine', desc: 'Valoriser la traçabilité et les labels locaux pour rassurer les consommateurs.' }
+        ],
+        chartData: {
+          marketShare: [35, 25, 20, 12, 8],
+          marketShareLabels: ['Producteurs', 'Magasins spécialisés', 'GMS bio', 'Marchés', 'Autres'],
+          evolution: [2.1, 3.5, 4.2, 4.8, 5.2],
+          evolutionLabels: ['2020', '2021', '2022', '2023', '2024'],
+          segments: [28, 22, 18, 15, 10, 7],
+          segmentsLabels: ['Fruits & Légumes', 'Produits laitiers', 'Viande', 'Céréales', 'Boissons', 'Autres']
+        },
+        context: {
+          geo: {
+            nom_commune: ville,
+            nom_region: region || 'Région',
+            population: 85000,
+            code_commune: '00000'
+          },
+          concurrence_locale_api: {
+            nb_operateurs_bio_total: 45,
+            nb_concurrents_directs: 12,
+            ventilation_activites: {
+              'Production': 18,
+              'Transformation': 12,
+              'Distribution': 10,
+              'Restauration': 5
+            },
+            concurrents_directs: [
+              { nom: 'Coopérative Bio Locale', activite: 'Production', categorie: 'Producteur', ville: ville, labels: ['AB', 'Bio Cohérence'] },
+              { nom: 'Marché Fermier', activite: 'Distribution', categorie: 'Commerce', ville: ville, labels: ['AB'] },
+              { nom: 'Épicerie Verte', activite: 'Vente', categorie: 'Commerce', ville: ville, labels: ['AB', 'Nature & Progrès'] }
+            ],
+            detail_operateurs: []
+          },
+          risques_locaux_api: {
+            code_commune: '00000',
+            basol: { total: 2, items: [] },
+            azi: { total: 1, items: [] },
+            catnat: {
+              total: 8,
+              items: [
+                { libelle_risque_jo: 'Inondation', date_debut_evt: '2018-06-15', date_fin_evt: '2018-06-18' },
+                { libelle_risque_jo: 'Sécheresse', date_debut_evt: '2022-07-01', date_fin_evt: '2022-08-31' }
+              ]
+            }
+          },
+          production_locale_region_5ans: [
+            { annee: 2020, surface_totale_ha: 12500, nb_fermes: 245 },
+            { annee: 2021, surface_totale_ha: 13200, nb_fermes: 258 },
+            { annee: 2022, surface_totale_ha: 14100, nb_fermes: 272 },
+            { annee: 2023, surface_totale_ha: 14800, nb_fermes: 285 },
+            { annee: 2024, surface_totale_ha: 15600, nb_fermes: 298 }
+          ],
+          production_nationale_5ans: [
+            { annee: 2020, surface_totale_ha: 2500000, nb_fermes: 50000 },
+            { annee: 2021, surface_totale_ha: 2650000, nb_fermes: 52500 },
+            { annee: 2022, surface_totale_ha: 2800000, nb_fermes: 55000 },
+            { annee: 2023, surface_totale_ha: 2950000, nb_fermes: 57200 },
+            { annee: 2024, surface_totale_ha: 3100000, nb_fermes: 59500 }
+          ],
+          tendance_ventes_pct_5ans: {
+            periode: { debut: 2020, fin: 2024 },
+            evolution_moyenne_pct: 4.8,
+            details: [
+              { annee: 2020, evolution_pct_moyenne: 3.2 },
+              { annee: 2021, evolution_pct_moyenne: 4.1 },
+              { annee: 2022, evolution_pct_moyenne: 4.9 },
+              { annee: 2023, evolution_pct_moyenne: 5.3 },
+              { annee: 2024, evolution_pct_moyenne: 5.8 }
+            ]
+          },
+          tendance_commerce_5ans: {
+            periode: { debut: 2020, fin: 2024 },
+            details: [
+              { annee: 2020, total_valeur_M_eur: 180 },
+              { annee: 2021, total_valeur_M_eur: 195 },
+              { annee: 2022, total_valeur_M_eur: 210 },
+              { annee: 2023, total_valeur_M_eur: 225 },
+              { annee: 2024, total_valeur_M_eur: 240 }
+            ]
+          },
+          macro_france: {
+            population: [
+              { annee: 2020, valeur: 67391582 },
+              { annee: 2021, valeur: 67571107 },
+              { annee: 2022, valeur: 67750000 },
+              { annee: 2023, valeur: 67900000 }
+            ],
+            gdp_growth: [
+              { annee: 2020, valeur: -8.0 },
+              { annee: 2021, valeur: 6.8 },
+              { annee: 2022, valeur: 2.5 },
+              { annee: 2023, valeur: 0.9 }
+            ],
+            agri_land_pct: [
+              { annee: 2020, valeur: 52.5 },
+              { annee: 2021, valeur: 52.3 },
+              { annee: 2022, valeur: 52.1 },
+              { annee: 2023, valeur: 51.9 }
+            ]
+          }
+        }
+      });
+    }, 1500);
+  });
+}
+
 function hideStatusBanner() {
   const banner = document.getElementById('statusBanner');
   if (banner) banner.style.display = 'none';
+  
+  // Afficher un message d'info si on est en mode démo
+  if (USE_DEMO_MODE) {
+    showDemoModeWarning();
+  }
+  
   document.getElementById('metadata').style.display = 'block';
   document.getElementById('mainReport').style.display = 'block';
+}
+
+function showDemoModeWarning() {
+  const container = document.querySelector('.container');
+  if (!container) return;
+  
+  const warning = document.createElement('div');
+  warning.className = 'demo-warning';
+  warning.innerHTML = `
+    <div class="demo-warning-content">
+      <i class="ri-information-line"></i>
+      <div>
+        <strong>Mode démonstration</strong>
+        <p>Les données affichées sont des exemples. Pour une analyse réelle avec l'IA, exécutez le serveur local.</p>
+      </div>
+      <button onclick="this.parentElement.parentElement.remove()" class="demo-close">
+        <i class="ri-close-line"></i>
+      </button>
+    </div>
+  `;
+  container.insertBefore(warning, container.firstChild);
 }
 
 function showStatusError(message) {

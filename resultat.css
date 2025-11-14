@@ -45,6 +45,55 @@ body {
    HEADER
    =========================== */
 
+.demo-warning {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+    border: 2px solid #ffc107;
+    border-radius: 16px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.2);
+}
+
+.demo-warning-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.demo-warning-content > i {
+    font-size: 2rem;
+    color: #ff9800;
+    flex-shrink: 0;
+}
+
+.demo-warning-content strong {
+    color: #e65100;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.demo-warning-content p {
+    color: #5d4037;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.demo-close {
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: #e65100;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+
+.demo-close:hover {
+    background: rgba(230, 81, 0, 0.1);
+}
+
 .header {
     background: #142910;
     color: #fff;
